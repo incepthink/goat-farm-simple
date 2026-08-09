@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom'
 import { motion } from 'framer-motion'
-import { Section, SectionHeader, Source } from '@/components/Section'
+import { Section, SectionHeader } from '@/components/Section'
 import { Reveal, RevealGroup, RevealItem } from '@/components/Reveal'
 import { StatGrid } from '@/components/Stat'
 import { Figure } from '@/components/Figure'
@@ -182,9 +182,6 @@ function Barriers() {
             </span>
             <h3 className="mt-3 text-title-sm text-forest">{barrier.term}</h3>
             <p className="mt-3 flex-1 text-body-sm text-ink-soft">{barrier.detail}</p>
-            <p className="mt-5">
-              <Source>{barrier.source}</Source>
-            </p>
           </RevealItem>
         ))}
       </RevealGroup>
@@ -215,9 +212,6 @@ function Model() {
               <span className="font-display text-title-md text-brass">{pillar.n}</span>
               <h3 className="mt-2 text-title-sm text-forest">{pillar.term}</h3>
               <p className="mt-3 flex-1 text-body-sm text-ink-soft">{pillar.detail}</p>
-              <p className="mt-5">
-                <Source>{pillar.source}</Source>
-              </p>
             </div>
           </RevealItem>
         ))}
@@ -269,9 +263,6 @@ function GainBar({
       </div>
 
       <p className="mt-3 text-body-sm text-cream/70">{gain.summary}</p>
-      <p className="mt-2">
-        <Source inverted>{gain.source}</Source>
-      </p>
     </li>
   )
 }
@@ -334,9 +325,6 @@ function Dairy() {
             <div className="flex h-full flex-col rounded-card bg-cream-deep p-7">
               <p className="font-display text-title-md text-forest">{item.term}</p>
               <p className="mt-3 flex-1 text-body-sm text-ink-soft">{item.detail}</p>
-              <p className="mt-5">
-                <Source>{item.source}</Source>
-              </p>
             </div>
           </RevealItem>
         ))}
@@ -380,10 +368,6 @@ function Women() {
 
           <p className="mt-7 border-l-2 border-brass pl-5 font-display text-title-sm text-forest">
             {WOMEN.turn}
-          </p>
-
-          <p className="mt-5">
-            <Source>{WOMEN.bodySource}</Source>
           </p>
         </Reveal>
       </div>
@@ -478,9 +462,6 @@ function Institutions() {
               </div>
               <p className="mt-1 text-caption text-ink-faint">{partner.name}</p>
               <p className="mt-4 flex-1 text-body-sm text-ink-soft">{partner.role}</p>
-              <p className="mt-5">
-                <Source>{partner.source}</Source>
-              </p>
             </div>
           </RevealItem>
         ))}

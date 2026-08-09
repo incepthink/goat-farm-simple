@@ -2,7 +2,14 @@ import { PageHero } from '@/components/PageHero'
 import { Section, SectionHeader } from '@/components/Section'
 import { Reveal } from '@/components/Reveal'
 import { ButtonLink } from '@/components/Button'
-import { LEGACY_HERO, LEGACY_PULL, LEGACY_CHAPTERS, LEGACY_TO_TODAY } from '@/data/legacy'
+import { Figure } from '@/components/Figure'
+import {
+  LEGACY_HERO,
+  LEGACY_PORTRAIT,
+  LEGACY_PULL,
+  LEGACY_CHAPTERS,
+  LEGACY_TO_TODAY,
+} from '@/data/legacy'
 
 /**
  * The biography.
@@ -24,11 +31,26 @@ export default function AnnasahebShinde() {
       />
 
       <Section tone="cream" size="lg">
-        <Reveal className="mx-auto max-w-measure text-center">
+        {/* The portrait opens the page, centred and alone, before a word of biography.
+            The existing site leads its about page with the same photograph; keeping it
+            first here is the clearest signal to the client that this is his page. */}
+        <Reveal className="mx-auto max-w-sm">
+          <Figure
+            src={LEGACY_PORTRAIT.src}
+            alt={LEGACY_PORTRAIT.alt}
+            ratio="square"
+            objectPosition={LEGACY_PORTRAIT.objectPosition}
+            blend
+            zoom={false}
+            priority
+          />
+        </Reveal>
+
+        <Reveal className="mx-auto mt-14 max-w-measure text-center" delay={0.1}>
           <p className="text-lead text-ink-soft">{LEGACY_HERO.standfirst}</p>
         </Reveal>
 
-        <Reveal className="mx-auto mt-14 max-w-measure" delay={0.1}>
+        <Reveal className="mx-auto mt-14 max-w-measure" delay={0.15}>
           <blockquote className="border-l-2 border-brass pl-6 sm:pl-8">
             <p className="font-display text-title-lg text-forest">{LEGACY_PULL.quote}</p>
             <footer className="mt-4 text-caption text-ink-faint">

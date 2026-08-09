@@ -34,6 +34,7 @@ export function Figure({
   priority = false,
   zoom = true,
   objectPosition,
+  blend = false,
 }: {
   /** Path under /images, e.g. "07-dairy/image41.webp". Absolute paths pass through. */
   src: string
@@ -45,6 +46,17 @@ export function Figure({
   priority?: boolean
   zoom?: boolean
   objectPosition?: string
+  /**
+   * Multiply the image against the tile's own ground.
+   *
+   * For the supplied cutouts that arrive on a pure white background — the Annasaheb
+   * portrait is one — where dropping the file in unmodified puts a white slab in the
+   * middle of a page that is warm cream everywhere else. Multiply resolves white to the
+   * tile colour exactly and leaves the subject alone.
+   *
+   * Only ever correct for a cutout. On a real photograph it would dirty the highlights.
+   */
+  blend?: boolean
 }) {
   const [loaded, setLoaded] = useState(false)
   const url = src.startsWith('/') ? src : `/images/${src}`
@@ -66,7 +78,7 @@ export function Figure({
   return (
     <figure className={className}>
       <div
-        className={`group relative overflow-hidden rounded-card border border-cream-edge bg-cream-deep ${RATIO[ratio]}`}
+        className={`group relative isolate overflow-hidden rounded-card border border-cream-edge bg-cream-deep ${RATIO[ratio]}`}
       >
         <img
           ref={ref}
@@ -79,7 +91,7 @@ export function Figure({
           style={objectPosition ? { objectPosition } : undefined}
           className={`h-full w-full object-cover transition-[transform,opacity] duration-700 ease-calm ${
             loaded ? 'opacity-100' : 'opacity-0'
-          } ${zoom ? 'group-hover:scale-[1.03]' : ''}`}
+          } ${zoom ? 'group-hover:scale-[1.03]' : ''} ${blend ? 'mix-blend-multiply' : ''}`}
         />
       </div>
 

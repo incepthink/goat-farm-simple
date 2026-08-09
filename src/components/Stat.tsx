@@ -1,6 +1,5 @@
 import { CountUp } from './CountUp'
 import { RevealGroup, RevealItem } from './Reveal'
-import { Source } from './Section'
 import type { Stat as StatType } from '@/data/types'
 
 /**
@@ -40,10 +39,6 @@ export function StatTile({ stat, inverted = false }: { stat: StatType; inverted?
           {stat.note}
         </p>
       ) : null}
-
-      <p className="mt-auto pt-4">
-        <Source inverted={inverted}>{stat.source}</Source>
-      </p>
     </div>
   )
 }

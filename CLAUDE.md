@@ -182,7 +182,9 @@ ask for originals).
 
 ### Open asks for the client
 
-1. A photograph of Annasaheb Shinde. The page about him currently has none.
+1. A higher-resolution original of the Annasaheb portrait — the supplied `annasaheb.png`
+   is a 1469 × 530 cutout on a white ground, and an archive photograph of him in office
+   would serve the page better than a cutout. See `LEGACY_PORTRAIT` in `src/data/legacy.ts`.
 2. Clean originals of the GPS-stamped files, especially `07-dairy/image48` (distribution).
 3. Higher-resolution portraits for the patrons and committee.
 4. Confirmed donation amounts, and the registration numbers.

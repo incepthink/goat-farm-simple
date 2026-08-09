@@ -1,12 +1,12 @@
 import { PageHero } from '@/components/PageHero'
-import { Section, SectionHeader, Source } from '@/components/Section'
+import { Section, SectionHeader } from '@/components/Section'
 import { Reveal, RevealGroup, RevealItem } from '@/components/Reveal'
 import { StatGrid } from '@/components/Stat'
 import { Figure, PhotoPending } from '@/components/Figure'
 import { ButtonLink } from '@/components/Button'
 import { BREED, MODEL, TAGGING, DAIRY, VERTICALS, VERTICALS_INTRO } from '@/data/story'
 import { FUTURE, TRACTION, AS_OF } from '@/data/traction'
-import { SURVEYED_VILLAGES, VILLAGE_TABLE_SOURCE } from '@/data/villages'
+import { SURVEYED_VILLAGES } from '@/data/villages'
 
 /**
  * The goat milk project in full — the page for anyone who wants the detail behind the
@@ -57,9 +57,6 @@ export default function GoatMilkProject() {
                 </div>
               ))}
             </dl>
-            <p className="mt-4">
-              <Source>{BREED.standfirstSource}</Source>
-            </p>
           </Reveal>
         </div>
 
@@ -82,9 +79,6 @@ export default function GoatMilkProject() {
               <div className="flex h-full flex-col rounded-card bg-cream-deep p-7">
                 <h3 className="text-title-sm text-forest">{item.term}</h3>
                 <p className="mt-3 flex-1 text-body-sm text-ink-soft">{item.detail}</p>
-                <p className="mt-5">
-                  <Source>{item.source}</Source>
-                </p>
               </div>
             </RevealItem>
           ))}
@@ -117,9 +111,6 @@ export default function GoatMilkProject() {
                 </li>
               ))}
             </ul>
-            <p className="mt-5">
-              <Source inverted>{TAGGING.monitoringSource}</Source>
-            </p>
 
             <p className="mt-8 border-l-2 border-brass-soft pl-5 text-body text-cream/85">
               {TAGGING.moat}
@@ -132,7 +123,7 @@ export default function GoatMilkProject() {
         <Reveal className="mx-auto mt-14 max-w-measure rounded-card border border-cream/15 bg-forest-deep/40 p-8 text-center">
           <p className="font-display text-title-sm text-cream">“{TAGGING.honesty.text}”</p>
           <p className="mt-3 text-caption text-cream/55">
-            {TAGGING.honesty.attribution} · <Source inverted>{TAGGING.honesty.source}</Source>
+            {TAGGING.honesty.attribution}
           </p>
         </Reveal>
       </Section>
@@ -152,9 +143,6 @@ export default function GoatMilkProject() {
         <Reveal className="mx-auto mt-14 max-w-measure text-center" delay={0.1}>
           <h3 className="font-display text-title-md text-forest">{DAIRY.facility.heading}</h3>
           <p className="mt-4 text-lead text-ink-soft">{DAIRY.facility.body}</p>
-          <p className="mt-4">
-            <Source>{DAIRY.facility.source}</Source>
-          </p>
         </Reveal>
       </Section>
 
@@ -182,9 +170,6 @@ export default function GoatMilkProject() {
                 </p>
                 <p className="mt-3 flex-1 text-body-sm text-ink-soft">{vertical.detail}</p>
                 <p className="mt-4 text-caption text-ink-faint">{vertical.status}</p>
-                <p className="mt-2">
-                  <Source>{vertical.source}</Source>
-                </p>
               </article>
             </RevealItem>
           ))}
@@ -233,9 +218,6 @@ export default function GoatMilkProject() {
               ))}
             </tbody>
           </table>
-          <p className="mt-4">
-            <Source>{VILLAGE_TABLE_SOURCE}</Source>
-          </p>
         </Reveal>
       </Section>
 
@@ -268,17 +250,11 @@ export default function GoatMilkProject() {
               </li>
             ))}
           </ul>
-          <p className="mt-4 text-center">
-            <Source inverted>{FUTURE.volumeSource}</Source>
-          </p>
         </Reveal>
 
         <Reveal className="mx-auto mt-14 max-w-measure text-center" delay={0.15}>
           <h3 className="font-display text-title-md text-cream">{FUTURE.genetics.heading}</h3>
           <p className="mt-4 text-lead text-cream/80">{FUTURE.genetics.body}</p>
-          <p className="mt-4">
-            <Source inverted>{FUTURE.genetics.source}</Source>
-          </p>
 
           <div className="mt-10 flex flex-wrap justify-center gap-4">
             <ButtonLink to="/donate" variant="inverted">

@@ -1,5 +1,5 @@
 import { PageHero } from '@/components/PageHero'
-import { Section, SectionHeader, Source } from '@/components/Section'
+import { Section, SectionHeader } from '@/components/Section'
 import { Reveal } from '@/components/Reveal'
 import { Figure } from '@/components/Figure'
 import { TIMELINE, TIMELINE_INTRO } from '@/data/timeline'
@@ -55,10 +55,6 @@ export default function Events() {
                     className="mt-7"
                   />
                 ) : null}
-
-                <p className="mt-4">
-                  <Source>{milestone.source}</Source>
-                </p>
               </div>
             </Reveal>
           ))}

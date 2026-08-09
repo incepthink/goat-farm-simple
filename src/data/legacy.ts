@@ -21,12 +21,35 @@ export const LEGACY_HERO = {
   standfirst:
     'A Member of Parliament for the Kopergaon constituency, fifteen years a minister in the Food & Agriculture Ministry, and one of the architects of the Green Revolution. He inherited a country that could not feed itself and left one that could.',
   /**
-   * We hold no photograph of Annasaheb himself — the client's existing site does not
-   * publish one either. A field image stands in. Ask the client for a portrait: on a
-   * page that is entirely about one man, his absence from it is conspicuous.
+   * The banner stays a field photograph even now that we hold a portrait of Annasaheb.
+   * `PageHero` runs its image at 40% opacity under two forest washes, which is what makes
+   * white type readable over it — and which would turn a portrait on a white ground into a
+   * grey slab with a face in it. The portrait gets its own plate below the fold instead.
    */
   image: '11-community/B_p06_01.webp',
   imageAlt: 'Farmland in the districts the foundation works in',
+}
+
+/**
+ * The portrait, supplied by the client and used on the existing site's about page.
+ *
+ * It arrives as a cutout on a pure white ground, 1469 × 530, with the subject occupying
+ * x 440–975 — a little over a third of the frame, and cropped at the chest by the bottom
+ * edge. Two decisions follow:
+ *
+ *  · It is cropped to its subject in CSS, not re-cut as a file. `objectPosition` below is
+ *    the horizontal centre of that bounding box expressed as a percentage of the source,
+ *    so a cleaner or higher-resolution original remains a straight file swap.
+ *  · It is rendered with `blend`, so the white ground multiplies down to the tile colour
+ *    rather than sitting in the page as a white rectangle.
+ *
+ * Still worth asking the client for: a higher-resolution original, and ideally an archive
+ * photograph of him in office rather than a cutout.
+ */
+export const LEGACY_PORTRAIT = {
+  src: '/images/annasaheb.png',
+  alt: 'Annasaheb Shinde',
+  objectPosition: '47% 50%',
 }
 
 export const LEGACY_PULL = {

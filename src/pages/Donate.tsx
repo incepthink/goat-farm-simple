@@ -1,5 +1,5 @@
 import { PageHero } from '@/components/PageHero'
-import { Section, SectionHeader, Source } from '@/components/Section'
+import { Section, SectionHeader } from '@/components/Section'
 import { Reveal, RevealGroup, RevealItem } from '@/components/Reveal'
 import { ButtonLink } from '@/components/Button'
 import { DONATION_TIERS, DONATE_COPY } from '@/data/donationTiers'
@@ -54,9 +54,6 @@ export default function Donate() {
               <div className="card flex h-full flex-col p-7">
                 <h3 className="text-title-sm text-forest">{tier.title}</h3>
                 <p className="mt-3 flex-1 text-body-sm text-ink-soft">{tier.body}</p>
-                <p className="mt-5">
-                  <Source>{tier.source}</Source>
-                </p>
               </div>
             </RevealItem>
           ))}
@@ -76,9 +73,6 @@ export default function Donate() {
               <div className="flex h-full flex-col rounded-card border-2 border-brass bg-white p-8">
                 <h3 className="text-title-md text-forest">{tier.title}</h3>
                 <p className="mt-4 flex-1 text-body text-ink-soft">{tier.body}</p>
-                <p className="mt-5">
-                  <Source>{tier.source}</Source>
-                </p>
               </div>
             </RevealItem>
           ))}
@@ -93,9 +87,6 @@ export default function Donate() {
               {DONATE_COPY.allocation.map((item) => (
                 <li key={item.label} className="py-4">
                   <p className="text-body-sm text-ink">{item.label}</p>
-                  <p className="mt-1">
-                    <Source>{item.source}</Source>
-                  </p>
                 </li>
               ))}
             </ul>
@@ -112,9 +103,6 @@ export default function Donate() {
                 <li key={item.claim}>
                   <p className="text-body-sm font-semibold text-forest">{item.claim}</p>
                   <p className="mt-1.5 text-body-sm text-ink-soft">{item.detail}</p>
-                  <p className="mt-1.5">
-                    <Source>{item.source}</Source>
-                  </p>
                 </li>
               ))}
             </ul>

@@ -119,12 +119,3 @@ export function SectionHeader({
     </Reveal>
   )
 }
-
-/** A small citation line. Every figure on the site carries one. */
-export function Source({ children, inverted = false }: { children: ReactNode; inverted?: boolean }) {
-  return (
-    <span className={`text-source ${inverted ? 'text-cream/45' : 'text-ink-faint'}`}>
-      {children}
-    </span>
-  )
-}

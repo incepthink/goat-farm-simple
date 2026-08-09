@@ -1,5 +1,5 @@
 import { PageHero } from '@/components/PageHero'
-import { Section, SectionHeader, Source } from '@/components/Section'
+import { Section, SectionHeader } from '@/components/Section'
 import { Reveal, RevealGroup, RevealItem } from '@/components/Reveal'
 import { StatGrid } from '@/components/Stat'
 import { ButtonLink } from '@/components/Button'
@@ -98,7 +98,6 @@ export default function CsrActivity() {
                 <dt className="text-body-sm text-ink-soft">{gain.metric}</dt>
                 <dd className="text-right">
                   <span className="font-display text-title-sm text-forest">{gain.to}</span>
-                  <span className="ml-3 text-source text-ink-faint">{gain.source}</span>
                 </dd>
               </div>
             ))}
@@ -124,10 +123,6 @@ export default function CsrActivity() {
             </RevealItem>
           ))}
         </RevealGroup>
-
-        <Reveal className="mt-8 text-center" delay={0.1}>
-          <Source inverted>{SDGS.source}</Source>
-        </Reveal>
       </Section>
 
       <Section tone="cream" size="lg">
