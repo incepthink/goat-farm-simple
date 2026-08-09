@@ -1,0 +1,132 @@
+@import '@fontsource-variable/fraunces';
+@import '@fontsource-variable/manrope';
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    /* Fraunces axes. SOFT/WONK at 0 and a low optical size: traditional book serif,
+       none of the playful wobble the typeface offers at higher settings. */
+    --fraunces-display: 'SOFT' 0, 'WONK' 0, 'opsz' 48;
+  }
+
+  html {
+    -webkit-text-size-adjust: 100%;
+    /* Lenis drives scrolling; native smooth-scroll would fight it. */
+    scroll-behavior: auto;
+  }
+
+  body {
+    @apply bg-cream text-ink font-sans text-body antialiased;
+    font-variant-numeric: tabular-nums;
+    text-rendering: optimizeLegibility;
+    overflow-x: hidden;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4 {
+    @apply font-display text-forest;
+    font-variation-settings: var(--fraunces-display);
+    font-weight: 600;
+    text-wrap: balance;
+  }
+
+  p {
+    text-wrap: pretty;
+  }
+
+  /* Every statistic on the site is tabular — figures must not jitter while a count-up runs. */
+  .tnum {
+    font-variant-numeric: tabular-nums lining-nums;
+    font-feature-settings: 'tnum' 1, 'lnum' 1;
+  }
+
+  :focus-visible {
+    @apply outline-none ring-2 ring-brass ring-offset-2 ring-offset-cream;
+  }
+
+  ::selection {
+    @apply bg-forest text-cream;
+  }
+
+  /* Lenis */
+  html.lenis,
+  html.lenis body {
+    height: auto;
+  }
+  .lenis.lenis-smooth {
+    scroll-behavior: auto !important;
+  }
+  .lenis.lenis-stopped {
+    overflow: hidden;
+  }
+}
+
+@layer components {
+  .shell {
+    @apply mx-auto w-full max-w-shell px-gutter;
+  }
+
+  .shell-wide {
+    @apply mx-auto w-full max-w-shell-wide px-gutter;
+  }
+
+  /* The small uppercase label above a section heading. */
+  .eyebrow {
+    @apply font-sans text-eyebrow font-bold uppercase text-brass;
+  }
+
+  /* A card: hairline, warm paper, one restrained shadow. */
+  .card {
+    @apply rounded-card border border-cream-edge bg-white shadow-card;
+  }
+
+  .card-hover {
+    @apply transition-all duration-500 ease-calm hover:-translate-y-1 hover:shadow-card-hover;
+  }
+
+  .hairline {
+    @apply border-t border-cream-edge;
+  }
+
+  /* Body prose inside content pages. */
+  .prose-asf p {
+    @apply mb-5 text-lead text-ink-soft last:mb-0;
+  }
+}
+
+@layer utilities {
+  /* Mask-based line reveal, used by page titles. */
+  .mask-line {
+    display: block;
+    overflow: hidden;
+  }
+
+  .no-scrollbar {
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+  }
+  .no-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+}
+
+/*
+ * Reduced motion — non-negotiable.
+ * Everything animated must arrive at its final state instantly, not merely animate faster.
+ * Framer Motion components additionally check the media query in useReducedMotion.
+ */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+}
