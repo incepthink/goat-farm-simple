@@ -176,19 +176,14 @@ export const TECHNICAL: PersonEntry[] = [
 export const EXECUTIVE: PersonEntry[] = [
   {
     name: 'Mr. Anil Annasaheb Shinde',
-    role: 'Chief Executive Officer, ASF',
+    role: 'Chief Executive Officer',
     bio: 'An entrepreneur at both rural and urban level, with working knowledge of animal husbandry development. Leads the foundation.',
     image: `${P}/executive-1.png`,
   },
   {
-    /**
-     * Not an error, and it is worth stating rather than quietly listing him twice: the
-     * same person is COO of the non-profit and CEO of the commercial company. Roles are
-     * therefore always labelled by entity. See ORG/ENTITIES in org.ts.
-     */
     name: 'Mr. Kiran Shreekant Patwardhan',
-    role: 'Chief Operating Officer, ASF · Chief Executive Officer, IGBDPL',
-    bio: 'Works across solid waste management, the rural economy, women’s empowerment and animal husbandry development. Holds the operating role in the foundation and the chief executive role in its commercial arm.',
+    role: 'Chief Operating Officer',
+    bio: 'Works across solid waste management, the rural economy, women’s empowerment and animal husbandry development.',
     image: `${P}/blog-Mr__Kiran_patwardhan.jpg`,
   },
 ]
@@ -254,7 +249,7 @@ export const COMMITTEE_GROUPS: { title: string; blurb: string; people: PersonEnt
   },
   {
     title: 'Executive Team',
-    blurb: 'Day-to-day leadership of the foundation and its commercial arm.',
+    blurb: 'Day-to-day leadership of the foundation.',
     people: EXECUTIVE,
   },
   {

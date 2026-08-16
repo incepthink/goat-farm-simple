@@ -9,7 +9,7 @@ export const HERO = {
   /** Split across lines deliberately — the mask reveal animates per word. */
   headline: 'A goat is the only savings a family has. We stopped them having to sell it.',
   standfirst:
-    'Shepherd families in north Maharashtra already own goats. But a goat with low yield and no reliable buyer is a savings account you can only close — sold once, for meat, and gone. We make the animal healthier and we buy its milk every single day. The same goat becomes an income.',
+    'Shepherd families in north Maharashtra already own goats. But a goat with low yield and no reliable buyer is a savings account you can only close — sold once, for meat, and gone. We make the animal healthier, and our associates buy its milk every single day, at a rate better than the local one. The same goat becomes an income.',
   scrollCue: 'Scroll',
   image: '01-hero/A_p01_01.webp',
   imageAlt:
@@ -170,7 +170,7 @@ export const MODEL = {
   eyebrow: 'The model',
   heading: 'Four things, all at once, or none of it works',
   standfirst:
-    'Making a goat healthier only earns a family anything if someone reliably buys the extra milk. And a milk buyer needs healthy, high-yielding goats to buy from in the first place. Neither half works without the other — which is exactly why there are two organisations, one doing each.',
+    'Making a goat healthier only earns a family anything if someone reliably buys the extra milk. And a milk buyer needs healthy, high-yielding goats to buy from in the first place. Neither half works without the other, so the foundation does both: it improves the animal, and it brings the buyer.',
   pillars: [
     {
       n: '01',
@@ -197,7 +197,7 @@ export const MODEL = {
       n: '04',
       term: 'A guaranteed buyer',
       detail:
-        'Market linkage for milk, meat and manure — the piece that converts a healthier animal into money arriving on a predictable day.',
+        'Market linkage for milk, meat and manure. Our associates collect daily and pay above the local rate — the piece that converts a healthier animal into money arriving on a predictable day.',
       source: 'A p6 L23–29',
     },
   ],
@@ -272,11 +272,20 @@ export const TAGGING = {
  * BEAT 7 — The dairy
  * ──────────────────────────────────────────────────────────────────────────── */
 
+/**
+ * The dairy is NOT the foundation's, and the copy here must never imply that it is.
+ *
+ * The plant belongs to an associate. What the foundation did was secure the linkage — which
+ * is the persuasive fact anyway: the families have a working buyer to deliver to, today,
+ * not a proposal. Describe the facility, never claim it. The building paragraph below is a
+ * separate thing and it *is* the foundation's: it is the long-leased premises with the
+ * training hall, dormitories and distillation room.
+ */
 export const DAIRY = {
   eyebrow: 'The dairy',
-  heading: 'It is already built',
+  heading: 'The milk has somewhere to go, every day',
   standfirst:
-    'Most projects asking for money are a proposal. This one has a plant — commissioned, staffed and running, on the Amravati Dam Road at Malpur.',
+    'Most projects asking for money are a proposal. The milk from these flocks goes to a working plant on the Amravati Dam Road at Malpur — commissioned, staffed and running.',
   spec: [
     { term: '6 × 5,000 L', detail: 'Bulk milk chillers — 30,000 litres of chilling capacity', source: 'C s13' },
     { term: 'Testing laboratory', detail: 'A full laboratory set up for all types of milk testing', source: 'C s13' },
@@ -358,7 +367,7 @@ export const VERTICALS: Vertical[] = [
   {
     slug: 'milk',
     name: 'Goat milk',
-    line: 'The core of the business',
+    line: 'What the family sells daily',
     detail:
       'Collected twice daily from tagged flocks, weighed, tested at every draw, chilled and transported. Positioned as an immunity booster with higher nutritional and medicinal value and a lower fat proportion than cow milk.',
     image: '04-women/image39.webp',
@@ -409,6 +418,6 @@ export const VERTICALS_INTRO = {
   eyebrow: 'Four verticals',
   heading: 'Everything the animal produces has somewhere to go',
   standfirst:
-    'Milk is the business. But a goat also produces dung and urine, and it has to eat — so the same flock supports four separate lines, three of which recycle what would otherwise be waste.',
+    'Milk is what the family sells every day. But a goat also produces dung and urine, and it has to eat — so the foundation runs three more lines that turn what would otherwise be waste into income, and cut what a family spends on feed.',
   source: 'C s14',
 }

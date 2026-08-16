@@ -10,7 +10,7 @@ import { CONTACT, OFFICES, LEADERSHIP } from '@/data/org'
  *
  * ⚠️  The form composes a `mailto:` and hands off to the visitor's mail client. There is
  * no backend on this site and no form endpoint has been provisioned, and a form that
- * silently swallows an investor enquiry is materially worse than no form at all.
+ * silently swallows a CSR enquiry is materially worse than no form at all.
  *
  * To make it a real form later, replace `handleSubmit` with a POST to the endpoint and
  * keep everything else: the fields, the labels and the validation are already right.
@@ -18,7 +18,7 @@ import { CONTACT, OFFICES, LEADERSHIP } from '@/data/org'
 
 const ENQUIRY_TYPES = [
   'CSR or corporate partnership',
-  'Investment or commercial partnership',
+  'Donation or grant',
   'Institutional or research collaboration',
   'Buying goat milk or other products',
   'Media',
@@ -204,7 +204,7 @@ export default function Contact() {
         <SectionHeader
           eyebrow="Enquiries"
           heading="Send us a message"
-          standfirst="Investor, CSR, institutional and product enquiries all land in the same place and are answered by a person."
+          standfirst="Donation, CSR, institutional and product enquiries all land in the same place and are answered by a person."
         />
 
         <Reveal className="mx-auto mt-14 max-w-2xl" delay={0.1}>

@@ -49,7 +49,7 @@ export default function CsrActivity() {
       <PageHero
         eyebrow="CSR"
         title="What corporate funding pays for here"
-        standfirst="The non-revenue half of the project — the half that makes the commercial half possible, and the half no business model will ever fund."
+        standfirst="The field work that earns the foundation nothing, and without which none of the rest of it happens."
         image="09-events/image31.webp"
         imageAlt="Veterinarians examining goats at a village health camp with MAFSU"
       />
@@ -57,8 +57,8 @@ export default function CsrActivity() {
       <Section tone="cream" size="lg">
         <SectionHeader
           eyebrow="The case"
-          heading="Two organisations, because the work has two halves"
-          standfirst="Making a goat healthier earns a family nothing unless someone buys the extra milk — and a milk business needs healthy animals to buy from. The commercial arm can fund the second half. Nothing but donor and CSR money will ever fund the first."
+          heading="Why this work needs donors"
+          standfirst="Making a goat healthier earns a family nothing unless someone buys the extra milk. Securing that buyer costs the foundation nothing to maintain. Making four thousand animals healthy enough to be worth buying from — vets, feed, sheds, training, records — is the part that has to be paid for, and no business model will ever pay for it."
         />
       </Section>
 

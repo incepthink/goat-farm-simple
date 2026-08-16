@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom'
-import { CONTACT, OFFICES, ORG, IGBDPL_IDENTIFIERS } from '@/data/org'
+import { CONTACT, OFFICES, ORG } from '@/data/org'
 import { NAV, NAV_CTA } from '@/data/nav'
 import { AsfLogo } from '@/components/brand/AsfLogo'
 
@@ -11,8 +11,8 @@ import { AsfLogo } from '@/components/brand/AsfLogo'
  * is the single most persuasive line on the site: a project with a plant you can drive to
  * is not a proposal.
  *
- * The company identifiers are here rather than on a page of their own for the same reason
- * a letterhead carries them: someone doing due diligence looks at the bottom of the page.
+ * Only the foundation's own registered name appears in the rule below. No associate's
+ * company identifiers belong on this site — see the header of data/org.ts.
  */
 
 const SOCIAL = [
@@ -151,10 +151,7 @@ export function Footer() {
             <p>
               © {year} {ORG.legalName}. All rights reserved.
             </p>
-            <p>
-              Indigenous Goat Breed Development Pvt. Ltd. — CIN {IGBDPL_IDENTIFIERS.cin} · GST{' '}
-              {IGBDPL_IDENTIFIERS.gstin}
-            </p>
+            <p>A Section 8 non-profit company.</p>
           </div>
         </div>
       </div>

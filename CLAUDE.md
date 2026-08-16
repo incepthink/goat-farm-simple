@@ -36,19 +36,44 @@ knows where everything is, and **replaces its typography, palette and copy** ent
 
 ## 2. What the organisation actually is
 
-**Not a goat farm.** A vertically integrated rural livelihood venture in north Maharashtra,
-run by three linked entities. The full brief lives in `../goat-farm-frontend/CLAUDE.md` —
-read it before writing any factual copy. The short version:
+**Not a goat farm.** A rural livelihood programme in north Maharashtra. The full brief
+lives in `../goat-farm-frontend/CLAUDE.md` — read it before writing any factual copy. The
+short version:
 
 Poor shepherd families already own goats. But a goat with low yield and no reliable buyer
 is **a savings account they can only close** — sold once, for meat, and gone. Make the
-animal healthier *and* guarantee to buy its milk daily, and the same goat flips from a
-one-time sale into recurring income. Both halves must happen at once, which is why there
-are two organisations: ASF (donor-funded, farmer-facing) and IGBDPL (commercially funded,
-milk and processing).
+animal healthier *and* make sure its milk is bought daily, and the same goat flips from a
+one-time sale into recurring income. Both halves must happen at once: the foundation does
+the first itself, and brings in the buyer for the second.
 
-The two defensible assets: **the dairy already exists** (6 × 5,000 L chillers, testing lab,
-weighing line), and **every goat is tagged and recorded twice daily**.
+The two defensible assets: **the milk has a working buyer and a working plant to go to**
+(6 × 5,000 L chillers, testing lab, weighing line), and **every goat is tagged and recorded
+twice daily**.
+
+### ⚠️ This site is the non-profit's, and only the non-profit's
+
+Client instruction, 16 August 2026, and it supersedes anything in the sibling repo:
+
+- **One organisation on this site: the Annasaheb Shinde Foundation.** An earlier build
+  presented three linked entities side by side (ASF, IGBDPL, AJAMESH). All of that is gone.
+  Do not reintroduce an org-structure section, a CIN, a GST number, or any second entity's
+  name — not in the footer, not on `/core-committee`, nowhere.
+- **The buyers are "our associates", and they are never named.** The foundation improves
+  the animal; its associates collect the milk daily and pay **above the prevailing local
+  rate**. That comparative claim is the client's, and it is the furthest the copy goes —
+  no price, no margin, no revenue, ever (§4 still applies).
+- **The dairy at Malpur is an associate's, not the foundation's.** Describe the facility;
+  never claim it. "The plant is already built" was the old line and it is now false. The
+  long-leased *building* — training hall, dormitories, distillation room — **is** the
+  foundation's, and that paragraph stays.
+- **Nothing that reads as soliciting investment.** No investor CTAs, no equity language, no
+  commercial-partnership offers. `/donate` states plainly that the donation goes to the
+  foundation. Partnership means CSR, institutional and research.
+- Milk-volume projections (6,000 → 25,000 L/day, doc C) were **removed** — a commercial
+  forecast belonging to the buying side. Expansion is stated in goats, villages, families.
+
+Documents A/B/C remain the source of record for facts and citations, including doc C. Only
+the *framing* changed.
 
 ---
 

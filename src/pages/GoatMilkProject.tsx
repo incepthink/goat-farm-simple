@@ -22,7 +22,7 @@ export default function GoatMilkProject() {
       <PageHero
         eyebrow="Malpur · Sindkheda · Dist. Dhule"
         title="Goat Milk &amp; Breed Development"
-        standfirst="Four thousand tagged goats, one hundred and ten families, seventeen villages, and a dairy that already exists."
+        standfirst="Four thousand tagged goats, one hundred and ten families, seventeen villages, and a working dairy taking the milk."
         image="03-goats/B_p07_04.webp"
         imageAlt="A flock of Zalawadi goats in a village pen"
       />
@@ -234,25 +234,7 @@ export default function GoatMilkProject() {
           <StatGrid stats={FUTURE.targets} inverted columns={3} />
         </div>
 
-        <Reveal className="mx-auto mt-14 max-w-3xl" delay={0.1}>
-          <h3 className="text-center font-display text-title-md text-cream">
-            {FUTURE.volumeUnit}
-          </h3>
-          <ul className="mt-8 divide-y divide-cream/15 border-y border-cream/15">
-            {FUTURE.volumes.map((volume) => (
-              <li key={volume.year} className="flex items-baseline justify-between gap-6 py-4">
-                <span className="text-body-sm text-cream/70">{volume.year}</span>
-                <span className="tnum font-display text-title-md text-brass-soft">
-                  {volume.from === volume.to
-                    ? volume.to.toLocaleString('en-IN')
-                    : `${volume.from.toLocaleString('en-IN')} → ${volume.to.toLocaleString('en-IN')}`}
-                </span>
-              </li>
-            ))}
-          </ul>
-        </Reveal>
-
-        <Reveal className="mx-auto mt-14 max-w-measure text-center" delay={0.15}>
+        <Reveal className="mx-auto mt-16 max-w-measure text-center" delay={0.15}>
           <h3 className="font-display text-title-md text-cream">{FUTURE.genetics.heading}</h3>
           <p className="mt-4 text-lead text-cream/80">{FUTURE.genetics.body}</p>
 

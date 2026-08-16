@@ -187,13 +187,12 @@ export const FUTURE = {
   standfirst:
     'The systems and the staff already exist. That is what makes the expansion arithmetic rather than invention.',
   standfirstSource: 'A p12',
-  volumes: [
-    { year: 'Year 1', from: 6000, to: 10000, source: 'C s7' },
-    { year: 'Year 2', from: 10000, to: 15000, source: 'C s7' },
-    { year: 'Year 3', from: 25000, to: 25000, source: 'C s7' },
-  ],
-  volumeUnit: 'litres of goat milk per day',
-  volumeSource: 'C s7, C s2',
+  /**
+   * The three-year litres-per-day ramp that used to sit here has been removed. It was a
+   * commercial volume projection belonging to the buying side, and this site is the
+   * foundation's. The targets below are the foundation's own outcomes — animals, villages,
+   * families — and they are what expansion means here.
+   */
   targets: [
     { value: 6000, label: 'more goats tagged', note: 'Benefitting 600+ families and over 3,000 individuals', source: 'A p11 L20–21' },
     { value: 30, label: 'villages across two districts', note: 'Within the next two years', source: 'A p11 L22' },
@@ -220,18 +219,18 @@ export const FUTURE = {
 export const CLOSING = {
   heading: 'Two ways to be part of this',
   standfirst:
-    'A CSR head and a commercial partner are looking at the same evidence. Only the last step differs.',
+    'A CSR head and an institutional partner are looking at the same evidence. Only the last step differs.',
   donate: {
     title: 'Support this work',
     body:
-      'Fund the non-profit half — tagging, health cards, veterinary camps, training and the laboratory. This is the work that has no revenue attached to it, and it is the half that makes the other half possible.',
+      'Fund tagging, health cards, veterinary camps, training and the laboratory. None of it earns the foundation anything. All of it is what makes a family’s goat worth more, and its milk worth buying.',
     cta: 'Support this work',
     to: '/donate',
   },
   partner: {
     title: 'Partner with us',
     body:
-      'Corporate CSR, institutional collaboration or commercial partnership across milk, feed, fertilizer and pesticide. Talk to the team directly.',
+      'Corporate CSR, institutional collaboration or research partnership on breed development, animal health and rural livelihoods. Talk to the team directly.',
     cta: 'Partner with us',
     to: '/contact',
   },

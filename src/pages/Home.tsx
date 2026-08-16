@@ -126,10 +126,10 @@ function Aim() {
         </p>
         <p className="mt-5 text-lead text-ink-soft">
           We do two things at once, because neither works alone. We make the animal
-          healthier — veterinary care, feed, breeding, a health card per goat. And we
-          guarantee to buy its milk, every single day, at a chilling plant we have already
-          built. The same goat stops being something you sell and becomes something that
-          pays you.
+          healthier — veterinary care, feed, breeding, a health card per goat. And we make
+          sure the milk is bought: our associates collect it every single day, at a rate
+          better than the prevailing local one. The same goat stops being something you sell
+          and becomes something that pays you.
         </p>
       </Reveal>
 
@@ -306,7 +306,7 @@ function Dairy() {
       <SectionHeader
         id="dairy-heading"
         eyebrow={DAIRY.eyebrow}
-        heading="The plant is already built"
+        heading={DAIRY.heading}
         standfirst={DAIRY.standfirst}
       />
 
@@ -315,7 +315,7 @@ function Dairy() {
           src={DAIRY.gallery[0].file}
           alt={DAIRY.gallery[0].alt}
           ratio="panorama"
-          caption="The bulk milk chillers at Malpur — 30,000 litres of chilling capacity, commissioned and staffed."
+          caption="The bulk milk chillers at Malpur — 30,000 litres of chilling capacity, where the milk from these flocks is collected and chilled."
         />
       </Reveal>
 
@@ -382,7 +382,7 @@ const PROJECT_CARDS = [
     to: '/projects/goat-milk',
     eyebrow: 'Malpur · Dhule',
     title: 'Goat Milk & Breed Development',
-    body: 'The Zalawadi goat, tagged and recorded twice daily, with a built dairy buying the milk. 4,000 goats across 17 villages, and the project this site is mostly about.',
+    body: 'The Zalawadi goat, tagged and recorded twice daily, with a working dairy taking the milk. 4,000 goats across 17 villages, and the project this site is mostly about.',
     image: '03-goats/image7.webp',
     imageAlt: 'A Zalawadi goat photographed in side profile',
   },
@@ -515,7 +515,7 @@ function Closing() {
         id="closing-heading"
         eyebrow="What you can do"
         heading="Two ways to be part of this"
-        standfirst="A CSR head and a commercial partner are looking at the same evidence. Only the last step differs."
+        standfirst="A CSR head and an institutional partner are looking at the same evidence. Only the last step differs."
         inverted
       />
 
@@ -524,9 +524,9 @@ function Closing() {
           <div className="flex h-full flex-col rounded-card border border-cream/15 bg-forest-deep/40 p-8 text-center">
             <h3 className="text-title-md text-cream">Support this work</h3>
             <p className="mt-4 flex-1 text-body-sm text-cream/70">
-              Fund the non-profit half — tagging, health cards, veterinary camps, training and
-              the laboratory. This is the work with no revenue attached, and it is what makes
-              the other half possible.
+              Fund tagging, health cards, veterinary camps, training and the laboratory. None
+              of it earns the foundation anything. All of it is what makes a family’s goat
+              worth more, and its milk worth buying.
             </p>
             <div className="mt-7">
               <ButtonLink to="/donate" variant="inverted">
@@ -540,8 +540,8 @@ function Closing() {
           <div className="flex h-full flex-col rounded-card border border-cream/15 bg-forest-deep/40 p-8 text-center">
             <h3 className="text-title-md text-cream">Partner with us</h3>
             <p className="mt-4 flex-1 text-body-sm text-cream/70">
-              Corporate CSR, institutional collaboration or commercial partnership across
-              milk, feed, fertilizer and pesticide. Talk to the team directly.
+              Corporate CSR, institutional collaboration or research partnership on breed
+              development, animal health and rural livelihoods. Talk to the team directly.
             </p>
             <div className="mt-7">
               <ButtonLink

@@ -42,7 +42,7 @@ export const PAGE_META: Record<string, { title: string; description: string }> =
   '/': {
     title: 'Annasaheb Shinde Foundation — Agro & Social Development',
     description:
-      'A goat is a savings account rural families are forced to liquidate. We make the animal healthier and guarantee to buy its milk daily. 4,000 goats tagged across 17 villages in north Maharashtra.',
+      'A goat is a savings account rural families are forced to liquidate. We make the animal healthier and make sure its milk is bought daily, at a better rate. 4,000 goats tagged across 17 villages in north Maharashtra.',
   },
   '/annasaheb-shinde': {
     title: 'Annasaheb Shinde — Father of India’s Food Security',
@@ -86,11 +86,11 @@ export const PAGE_META: Record<string, { title: string; description: string }> =
   '/contact': {
     title: 'Contact — Annasaheb Shinde Foundation',
     description:
-      'Three offices — Mumbai, Pune and the project site at Malpur, Dhule. Investor, CSR and partnership enquiries.',
+      'Three offices — Mumbai, Pune and the project site at Malpur, Dhule. CSR, institutional and partnership enquiries.',
   },
   '/donate': {
     title: 'Donate — Annasaheb Shinde Foundation',
     description:
-      'Fund tagging, health cards, veterinary camps, training and the laboratory — the half of the project that produces no revenue and makes the rest possible.',
+      'Fund tagging, health cards, veterinary camps, training and the laboratory — the field work that earns the foundation nothing and makes everything else possible.',
   },
 }

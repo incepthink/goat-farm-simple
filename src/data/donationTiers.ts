@@ -89,9 +89,9 @@ export const SUGGESTED_AMOUNTS: number[] | null = null // TODO: client to confir
 
 export const DONATE_COPY = {
   eyebrow: 'Support this work',
-  heading: 'Fund the half that has no revenue',
+  heading: 'Fund the work that earns nothing',
   standfirst:
-    'Tagging, health cards, veterinary camps, training and the laboratory produce no income. They are also what make the milk worth collecting. That is the half ASF does, and it is the half that needs donors.',
+    'Tagging, health cards, veterinary camps, training and the laboratory produce no income. They are also what make a family’s goat worth more, and its milk worth buying. That work is funded by donors, and by nothing else.',
   image: '05-field-work/B_p05_05.webp',
   imageAlt: 'A veterinarian crouched in the dirt examining a goat during a village health camp',
   allocationHeading: 'Where it goes',
@@ -110,8 +110,14 @@ export const DONATE_COPY = {
   trustHeading: 'What we can tell you',
   trust: [
     {
-      claim: 'A Section 8 non-profit organisation',
-      detail: 'ASF is registered as a Section 8 non-profit.',
+      /**
+       * First, and it stays first. A donor should not have to infer which organisation
+       * they are giving to — this site is the foundation's alone, and the sentence that
+       * says so belongs at the top of the trust list, not implied by the letterhead.
+       */
+      claim: 'You are donating to the Annasaheb Shinde Foundation',
+      detail:
+        'A Section 8 non-profit, registered for agro and social development. Contributions fund the foundation’s own field work — animal health, nutrition, training, tagging and the laboratory.',
       source: 'A p3 L18',
     },
     {
