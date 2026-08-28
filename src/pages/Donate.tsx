@@ -93,7 +93,7 @@ export default function Donate() {
       }
 
       const response = await fetch(
-        'http://localhost:5000/api/create-order',
+        '/api/create-order',
         {
           method: 'POST',
           headers: {
