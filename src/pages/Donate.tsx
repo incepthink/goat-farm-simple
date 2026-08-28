@@ -124,13 +124,45 @@ export default function Donate() {
         description: 'Donation',
         order_id: data.order.id,
 
-        handler: function (paymentResponse: any) {
-          console.log('Payment successful:', paymentResponse)
-
-          alert(
-            `Payment successful! Payment ID: ${paymentResponse.razorpay_payment_id}`
-          )
+        handler: async function (paymentResponse: any) {
+  try {
+    const verifyResponse = await fetch(
+      'http://localhost:5000/api/verify-payment',
+      {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
         },
+        body: JSON.stringify({
+          razorpay_order_id: paymentResponse.razorpay_order_id,
+          razorpay_payment_id: paymentResponse.razorpay_payment_id,
+          razorpay_signature: paymentResponse.razorpay_signature,
+        }),
+      }
+    )
+
+    const verifyData = await verifyResponse.json()
+
+    if (verifyResponse.ok && verifyData.success) {
+      console.log('Payment verified successfully:', verifyData)
+
+      alert(
+        'Payment successful and verified! Thank you for your donation.'
+      )
+    } else {
+      alert(
+        verifyData.error ||
+        'Payment verification failed. Please contact us.'
+      )
+    }
+  } catch (error) {
+    console.error('Payment verification error:', error)
+
+    alert(
+      'Payment was completed, but verification failed. Please contact us.'
+    )
+  }
+},
 
         prefill: {
           name: formData.name,
