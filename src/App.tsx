@@ -18,6 +18,7 @@ const GoatMilkProject = lazy(() => import('@/pages/GoatMilkProject'))
 const IndigenousCowProject = lazy(() => import('@/pages/IndigenousCowProject'))
 const Contact = lazy(() => import('@/pages/Contact'))
 const Donate = lazy(() => import('@/pages/Donate'))
+
 const NotFound = lazy(() => import('@/pages/NotFound'))
 
 const ROUTES: { path: string; element: React.ReactNode }[] = [

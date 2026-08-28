@@ -1,143 +1,429 @@
+import { useState, type FormEvent, type ChangeEvent } from 'react'
 import { PageHero } from '@/components/PageHero'
-import { Section, SectionHeader } from '@/components/Section'
-import { Reveal, RevealGroup, RevealItem } from '@/components/Reveal'
-import { ButtonLink } from '@/components/Button'
-import { DONATION_TIERS, DONATE_COPY } from '@/data/donationTiers'
-import { CONTACT } from '@/data/org'
+import { Section } from '@/components/Section'
+import { Reveal } from '@/components/Reveal'
+import { Button } from '@/components/Button'
+import { DONATE_COPY } from '@/data/donationTiers'
 
-/**
- * The donation page.
- *
- * ⚠️  Read this before adding anything to this page.
- *
- * Three things are deliberately absent, and each one is absent for the same reason —
- * a donation page is the single worst place on a website to publish something you have
- * not verified:
- *
- *  1. **No rupee amounts.** No cost-per-intervention figure appears in any source
- *     document. Tiers therefore render without a price rather than with a guessed one.
- *     Fill in `amount` in data/donationTiers.ts when the client confirms and the price
- *     appears here automatically.
- *  2. **No allocation percentages.** We can say what donations fund. We cannot say in
- *     what proportion, because nobody has told us.
- *  3. **No 80G, FCRA or CSR-1 claim.** The registration numbers have not been supplied,
- *     and a wrong tax-benefit claim is the kind of error that ends a CSR relationship.
- *
- * There is also no payment gateway wired up. The page routes to a direct conversation
- * instead, which is honest, and for the donation sizes this project is actually seeking —
- * CSR cheques, not ten-rupee taps — it is very likely the right flow anyway.
- */
+declare global {
+  interface Window {
+    Razorpay: any
+  }
+}
+
+const DONATION_AMOUNTS = [500, 1000, 2500, 5000]
+
+const BANK_DETAILS = {
+  accountName: 'ANNASAHEB SHINDE FOUNDATION',
+  bankName: 'YOUR BANK NAME',
+  accountNumber: 'YOUR ACCOUNT NUMBER',
+  ifscCode: 'YOUR IFSC CODE',
+  branch: 'YOUR BRANCH NAME',
+}
+
 export default function Donate() {
-  const headline = DONATION_TIERS.filter((tier) => tier.headline)
-  const standard = DONATION_TIERS.filter((tier) => !tier.headline)
+  const [selectedAmount, setSelectedAmount] = useState<number | null>(1000)
+
+  const [formData, setFormData] = useState({
+    name: '',
+    email: '',
+    phone: '',
+    amount: '1000',
+  })
+
+  const [copied, setCopied] = useState<string | null>(null)
+  const [isLoading, setIsLoading] = useState(false)
+
+  const loadRazorpay = (): Promise<boolean> => {
+    return new Promise((resolve) => {
+      if (window.Razorpay) {
+        resolve(true)
+        return
+      }
+
+      const script = document.createElement('script')
+      script.src = 'https://checkout.razorpay.com/v1/checkout.js'
+
+      script.onload = () => resolve(true)
+      script.onerror = () => resolve(false)
+
+      document.body.appendChild(script)
+    })
+  }
+
+  const handleAmountClick = (amount: number) => {
+    setSelectedAmount(amount)
+
+    setFormData((previous) => ({
+      ...previous,
+      amount: amount.toString(),
+    }))
+  }
+
+  const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
+    const { name, value } = e.target
+
+    setFormData((previous) => ({
+      ...previous,
+      [name]: value,
+    }))
+
+    if (name === 'amount') {
+      setSelectedAmount(null)
+    }
+  }
+
+  const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
+    e.preventDefault()
+
+    if (!formData.amount || Number(formData.amount) < 1) {
+      alert('Please enter a valid donation amount')
+      return
+    }
+
+    setIsLoading(true)
+
+    try {
+      const razorpayLoaded = await loadRazorpay()
+
+      if (!razorpayLoaded) {
+        alert('Unable to load Razorpay. Please check your internet connection.')
+        setIsLoading(false)
+        return
+      }
+
+      const response = await fetch(
+        'http://localhost:5000/api/create-order',
+        {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({
+            amount: formData.amount,
+            name: formData.name,
+            email: formData.email,
+            phone: formData.phone,
+          }),
+        }
+      )
+
+      const data = await response.json()
+
+      if (!response.ok || !data.success) {
+        alert(data.error || 'Unable to create payment order')
+        setIsLoading(false)
+        return
+      }
+
+      const options = {
+        key: 'rzp_test_TV7lUhGiLoRcqj',
+        amount: data.order.amount,
+        currency: data.order.currency,
+        name: 'Annasaheb Shinde Foundation',
+        description: 'Donation',
+        order_id: data.order.id,
+
+        handler: function (paymentResponse: any) {
+          console.log('Payment successful:', paymentResponse)
+
+          alert(
+            `Payment successful! Payment ID: ${paymentResponse.razorpay_payment_id}`
+          )
+        },
+
+        prefill: {
+          name: formData.name,
+          email: formData.email,
+          contact: formData.phone,
+        },
+
+        theme: {
+          color: '#1f4d3b',
+        },
+
+        modal: {
+          ondismiss: function () {
+            setIsLoading(false)
+          },
+        },
+      }
+
+      const razorpay = new window.Razorpay(options)
+
+      razorpay.open()
+
+      setIsLoading(false)
+    } catch (error) {
+      console.error('Payment error:', error)
+      alert('Something went wrong. Please try again.')
+      setIsLoading(false)
+    }
+  }
+
+  const handleCopy = async (value: string, label: string) => {
+    try {
+      await navigator.clipboard.writeText(value)
+
+      setCopied(label)
+
+      setTimeout(() => {
+        setCopied(null)
+      }, 2000)
+    } catch {
+      alert('Unable to copy bank details')
+    }
+  }
 
   return (
     <>
       <PageHero
-        eyebrow={DONATE_COPY.eyebrow}
-        title={DONATE_COPY.heading}
-        standfirst={DONATE_COPY.standfirst}
+        eyebrow="Make a contribution"
+        title="Support Our Mission"
+        standfirst="Your contribution helps us continue our work and create a meaningful impact in communities."
         image={DONATE_COPY.image}
         imageAlt={DONATE_COPY.imageAlt}
       />
 
       <Section tone="cream" size="lg">
-        <SectionHeader
-          eyebrow="What a donation funds"
-          heading="Each of these is a real thing that happens in a village"
-          standfirst="Not budget lines. Every item below maps to an intervention the project already runs."
-        />
+        <Reveal className="mx-auto max-w-5xl">
+          <div className="grid gap-8 lg:grid-cols-2">
 
-        <RevealGroup as="ul" className="mt-14 grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
-          {standard.map((tier) => (
-            <RevealItem key={tier.id} as="li" className="h-full">
-              <div className="card flex h-full flex-col p-7">
-                <h3 className="text-title-sm text-forest">{tier.title}</h3>
-                <p className="mt-3 flex-1 text-body-sm text-ink-soft">{tier.body}</p>
+            <div className="rounded-card bg-white p-6 shadow-sm sm:p-8">
+              <p className="eyebrow text-brass">
+                Make a Donation
+              </p>
+
+              <h2 className="mt-3 text-title-md text-forest">
+                Choose Your Contribution
+              </h2>
+
+              <p className="mt-3 text-body-sm text-ink-soft">
+                Every contribution, big or small, helps us continue our mission.
+              </p>
+
+              <div className="mt-8">
+                <p className="text-body-sm font-semibold text-forest">
+                  Select Donation Amount
+                </p>
+
+                <div className="mt-4 grid grid-cols-2 gap-3">
+                  {DONATION_AMOUNTS.map((amount) => (
+                    <button
+                      key={amount}
+                      type="button"
+                      onClick={() => handleAmountClick(amount)}
+                      className={`rounded-card border px-4 py-3 text-body-sm font-semibold transition ${
+                        selectedAmount === amount
+                          ? 'border-forest bg-forest text-cream'
+                          : 'border-forest/20 bg-cream text-forest hover:border-forest'
+                      }`}
+                    >
+                      ₹{amount.toLocaleString('en-IN')}
+                    </button>
+                  ))}
+                </div>
               </div>
-            </RevealItem>
-          ))}
-        </RevealGroup>
-      </Section>
 
-      <Section tone="deep" size="lg">
-        <SectionHeader
-          eyebrow="The two large asks"
-          heading="What the project itself says it needs funded"
-          standfirst="These two are named in the project’s own documents as requiring dedicated funding, separate from running costs."
-        />
+              <form onSubmit={handleSubmit} className="mt-8 space-y-5">
 
-        <RevealGroup className="mx-auto mt-14 grid max-w-4xl grid-cols-1 gap-6 md:grid-cols-2">
-          {headline.map((tier) => (
-            <RevealItem key={tier.id} className="h-full">
-              <div className="flex h-full flex-col rounded-card border-2 border-brass bg-white p-8">
-                <h3 className="text-title-md text-forest">{tier.title}</h3>
-                <p className="mt-4 flex-1 text-body text-ink-soft">{tier.body}</p>
+                <div>
+                  <label
+                    htmlFor="amount"
+                    className="text-body-sm font-semibold text-forest"
+                  >
+                    Or Enter Custom Amount
+                  </label>
+
+                  <div className="relative mt-2">
+                    <span className="absolute left-4 top-1/2 -translate-y-1/2 font-semibold text-forest">
+                      ₹
+                    </span>
+
+                    <input
+                      id="amount"
+                      name="amount"
+                      type="number"
+                      min="1"
+                      required
+                      value={formData.amount}
+                      onChange={handleChange}
+                      placeholder="Enter amount"
+                      className="w-full rounded-card border border-forest/20 bg-cream py-3 pl-8 pr-4 text-body-sm text-ink outline-none transition focus:border-forest"
+                    />
+                  </div>
+                </div>
+
+                <div>
+                  <label
+                    htmlFor="name"
+                    className="text-body-sm font-semibold text-forest"
+                  >
+                    Full Name
+                  </label>
+
+                  <input
+                    id="name"
+                    name="name"
+                    type="text"
+                    required
+                    value={formData.name}
+                    onChange={handleChange}
+                    placeholder="Enter your full name"
+                    className="mt-2 w-full rounded-card border border-forest/20 bg-cream px-4 py-3 text-body-sm text-ink outline-none transition focus:border-forest"
+                  />
+                </div>
+
+                <div>
+                  <label
+                    htmlFor="email"
+                    className="text-body-sm font-semibold text-forest"
+                  >
+                    Email Address
+                  </label>
+
+                  <input
+                    id="email"
+                    name="email"
+                    type="email"
+                    required
+                    value={formData.email}
+                    onChange={handleChange}
+                    placeholder="Enter your email address"
+                    className="mt-2 w-full rounded-card border border-forest/20 bg-cream px-4 py-3 text-body-sm text-ink outline-none transition focus:border-forest"
+                  />
+                </div>
+
+                <div>
+                  <label
+                    htmlFor="phone"
+                    className="text-body-sm font-semibold text-forest"
+                  >
+                    Mobile Number
+                  </label>
+
+                  <input
+                    id="phone"
+                    name="phone"
+                    type="tel"
+                    required
+                    value={formData.phone}
+                    onChange={handleChange}
+                    placeholder="Enter your mobile number"
+                    className="mt-2 w-full rounded-card border border-forest/20 bg-cream px-4 py-3 text-body-sm text-ink outline-none transition focus:border-forest"
+                  />
+                </div>
+
+                <Button
+                  type="submit"
+                  disabled={isLoading}
+                  className="w-full"
+                >
+                  {isLoading
+                    ? 'Preparing Payment...'
+                    : `Donate ₹${Number(
+                        formData.amount || 0
+                      ).toLocaleString('en-IN')} Now`}
+                </Button>
+
+                <p className="text-center text-caption text-ink-faint">
+                  Secure payment powered by Razorpay
+                </p>
+              </form>
+            </div>
+
+            <div className="overflow-hidden rounded-card bg-white shadow-sm">
+              <div className="bg-forest p-8">
+                <p className="eyebrow text-brass-soft">
+                  Direct Bank Transfer
+                </p>
+
+                <h2 className="mt-3 text-title-md text-cream">
+                  Bank Details
+                </h2>
+
+                <p className="mt-3 text-body-sm text-cream/70">
+                  You can also make your donation directly using the bank account details below.
+                </p>
               </div>
-            </RevealItem>
-          ))}
-        </RevealGroup>
-      </Section>
 
-      <Section tone="cream" size="lg">
-        <div className="grid gap-14 lg:grid-cols-2">
-          <Reveal>
-            <h2 className="text-title-md text-forest">{DONATE_COPY.allocationHeading}</h2>
-            <ul className="mt-7 divide-y divide-cream-edge border-y border-cream-edge">
-              {DONATE_COPY.allocation.map((item) => (
-                <li key={item.label} className="py-4">
-                  <p className="text-body-sm text-ink">{item.label}</p>
-                </li>
-              ))}
-            </ul>
-            <p className="mt-6 text-caption text-ink-faint">
-              We have not published a percentage split, because no allocation breakdown exists
-              in the project documents and a donation page is not the place to estimate one.
-            </p>
-          </Reveal>
+              <div className="divide-y divide-cream-edge p-8">
+                <BankDetail
+                  label="Account Holder Name"
+                  value={BANK_DETAILS.accountName}
+                />
 
-          <Reveal delay={0.1}>
-            <h2 className="text-title-md text-forest">{DONATE_COPY.trustHeading}</h2>
-            <ul className="mt-7 space-y-6">
-              {DONATE_COPY.trust.map((item) => (
-                <li key={item.claim}>
-                  <p className="text-body-sm font-semibold text-forest">{item.claim}</p>
-                  <p className="mt-1.5 text-body-sm text-ink-soft">{item.detail}</p>
-                </li>
-              ))}
-            </ul>
-          </Reveal>
-        </div>
-      </Section>
+                <BankDetail
+                  label="Bank Name"
+                  value={BANK_DETAILS.bankName}
+                />
 
-      <Section tone="forest" size="lg">
-        <Reveal className="mx-auto max-w-measure text-center">
-          <p className="eyebrow text-brass-soft">How to give</p>
-          <h2 className="mt-4 text-title-lg text-cream">Speak to us directly</h2>
-          <p className="mt-6 text-lead text-cream/80">
-            We have not put a payment button on this page. Contributions to this project are
-            arranged in conversation — so that you know exactly which part of the work your
-            money is funding, and so that we can send you the registration and compliance
-            documents your finance team will ask for.
-          </p>
+                <BankDetail
+                  label="Account Number"
+                  value={BANK_DETAILS.accountNumber}
+                  copy
+                  copied={copied}
+                  onCopy={handleCopy}
+                />
 
-          <div className="mt-10 flex flex-wrap justify-center gap-4">
-            <ButtonLink to={`mailto:${CONTACT.emails[0].address}`} variant="inverted">
-              Email the CEO
-            </ButtonLink>
-            <ButtonLink
-              to="/contact"
-              variant="outline-inverted"
-            >
-              {DONATE_COPY.csrCta}
-            </ButtonLink>
+                <BankDetail
+                  label="IFSC Code"
+                  value={BANK_DETAILS.ifscCode}
+                  copy
+                  copied={copied}
+                  onCopy={handleCopy}
+                />
+
+                <BankDetail
+                  label="Branch"
+                  value={BANK_DETAILS.branch}
+                />
+              </div>
+            </div>
+
           </div>
-
-          <p className="mt-10 text-caption text-cream/50">
-            {DONATE_COPY.csrLine} Corporate and CSR contributions are handled by the same team.
-          </p>
         </Reveal>
       </Section>
     </>
+  )
+}
+
+type BankDetailProps = {
+  label: string
+  value: string
+  copy?: boolean
+  copied?: string | null
+  onCopy?: (value: string, label: string) => void
+}
+
+function BankDetail({
+  label,
+  value,
+  copy,
+  copied,
+  onCopy,
+}: BankDetailProps) {
+  return (
+    <div className="flex flex-col gap-3 py-5 sm:flex-row sm:items-center sm:justify-between">
+      <div>
+        <p className="text-caption text-ink-faint">
+          {label}
+        </p>
+
+        <p className="mt-1 text-body-sm font-semibold tracking-wide text-forest">
+          {value}
+        </p>
+      </div>
+
+      {copy && onCopy && (
+        <button
+          type="button"
+          onClick={() => onCopy(value, label)}
+          className="w-fit rounded-card border border-forest/20 px-4 py-2 text-caption font-semibold text-forest"
+        >
+          {copied === label ? 'Copied!' : 'Copy'}
+        </button>
+      )}
+    </div>
   )
 }
