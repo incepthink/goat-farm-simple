@@ -6,7 +6,7 @@
   "rewrites": [
     {
       "source": "/((?!images/|favicon|apple-touch-icon|og/|robots.txt|sitemap.xml|assets/).*)",
-      "destination": "/index.html"
+      "destination": "/"
     }
   ],
   "headers": [
